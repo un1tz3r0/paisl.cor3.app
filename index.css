@@ -1,0 +1,432 @@
+/*
+*:hover {
+	box-shadow: #fca8;
+}
+*/
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: grid;
+	place-items: center;
+	background: #333;
+	color: #888;
+	font-family: sans-serif;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+main {
+	display: grid;
+	grid-template-columns: 250px 8px 1fr;
+	grid-template-rows: 50px 1fr 8px 100px;
+	width: 100vw;
+	height: 100vh;
+	place-items: center;
+	--grid-gap: 4px;
+	overflow: hidden;
+}
+
+main > nav {
+	display: grid;
+	grid-column: 1/-1;
+	grid-row: 1/2;
+	box-sizing: border-box;
+	border-bottom: 1px solid #fff5;
+	background-color: #222;
+	height: 50px;
+	width: 100%;
+}
+
+main > nav > span.logo {
+	font-size: 50px;
+	text-shadow: 0px 0px -3px black 0px outset;
+}
+
+main > aside.settings {
+	display: grid;
+	grid-column: 1/2;
+	grid-row: 2/3;
+	place-self: start;
+	overflow-y: scroll;
+	height: 100%;
+	width: 100%;
+	border-right: thin solid #fff5;
+	border-bottom: thin solid #fff5;
+}
+
+main > section.graphics {
+	grid-column: 3 / 4;
+	grid-row: 2/3;
+	border-left: thin solid #fff5;
+	border-bottom: thin solid #fff5;	
+}
+
+main > .colgutter {
+	grid-row: 2 / 3;
+	grid-column: 2 / 3;
+	width: 8px;
+	background-color: #222;
+	--border-left: thin solid #fff8;
+	--border-right: thin solid #0008;
+	height: 100%;
+	box-sizing: border-box;
+	transition: all 1s ease;
+	display: grid;
+	place-items: center;
+}
+
+main > .rowgutter {
+	grid-row: 3 / 4;
+	grid-column: 1 / -1;
+	height: 8px;
+	background-color: #222;
+	--border-top: thin solid #fff8;
+	--border-bottom: thin solid #0008;
+	width: 100%;
+	box-sizing: border-box;
+	transition: all 1s ease;
+	display: grid;
+	place-items: center;
+}
+/*
+.rowgutter > svg {
+	height: 100%;
+}
+
+.colgutter > svg {
+	width: 100%;
+}
+*/
+
+.rowgutter:hover, .colgutter:hover {
+	cursor: resize;
+	background-color: #f883;
+	--border-color: #f889;
+	transition: all 0s ease;
+}
+
+/*
+.rowgutter:hover {
+	--height: 12px;
+}
+
+.colgutter:hover {
+	--width: 12px;
+}
+*/
+
+#svgviewcontainer {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+#svgviewcontainer > * {
+	grid-column: 1/2;
+	grid-row: 1/2;
+	width: 100%;
+	height: 100%;
+}
+
+#svgviewcontainer svg#drawing {
+	height: 100%;
+	width: 100%;
+}
+
+aside {
+	display: grid;
+	--border: thin solid #fff4;
+	background-color: #ffffff18;
+	--border-radius: 0.2em;
+	box-sizing: border-box;
+	grid-gap: 0.5em;
+	grid-template-columns: auto;
+	grid-template-rows: 1fr auto;
+	grid-auto-rows: auto;
+	grid-auto-flow: row;
+	place-items: start center;
+	width: auto;
+	height: min-content;
+	--padding: 0.5em;
+}
+
+aside > form {
+	place-self: start;
+	width: 100%;
+	height: content;
+	min-height: auto;
+	display: grid;
+	grid-template-columns: max-content auto min-content min-content;
+	grid-auto-rows: auto;
+	padding: 6px;
+	grid-gap: 4px;
+	font-size: small;
+}
+
+div.svgoutcontainer {
+	box-sizing: border-box;
+	place-self: stretch;
+	border: thin solid #fff4;
+	background-color: #ffffff08;
+	border-radius: 0.2em;
+	width: 100%;
+	display: grid;
+	grid-column: 1 / -1;
+	grid-row: 4 / 5;
+	overflow: scroll;
+}
+
+pre {
+	margin: 0px;
+	background-color: #00000018;
+	font-family: monospace;
+	width: 100%;
+	height: 100%;
+	place-self: stretch;
+}
+
+/*
+fieldset {
+	padding: 6px;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-auto-rows: auto;
+	place-items: stretch;
+	grid-gap: 6px;
+	grid-auto-flow: row;
+}
+*/
+
+button.clearbutton {
+	
+}
+
+form label {
+	grid-column: 1/2;
+}
+
+form section {
+	grid-column: 1/-1;
+	display: grid;
+	grid-template-columns: min-content auto min-content min-content;
+}
+
+form heading {
+	width: auto;
+	grid-column: 1/-1;
+	/*position: relative;
+	height: 1em;*/
+	margin-top: 0.5em;
+	/*margin-bottom: 0.5em;
+	transform: translatey(0.5em);*/
+	/*border-bottom-style: none;*/
+	border-bottom: 1px solid 0xfff8;
+	box-sizing: border-box;
+	/*background-color: #444;*/
+	grid-column: 1/-1;
+	font-size: 125%;
+}
+
+form heading::first-child {
+	margin-top: 0em;
+}
+
+form heading.expanded:before {
+	
+}
+
+form button.clearbutton {
+	appearance: none;
+	display: grid;
+	box-sizing: border-box;
+	font-size: calc(small * 0.7);
+	padding: 0.1212em;
+	place-self: center;
+	border-radius: 2px;
+	grid-column: 3/4;
+	border: thin solid #8882;
+	color: #8886;
+	background-color: #0002;
+	opacity: 0.1;
+}
+
+form button.clearbutton.enabled {
+	/*
+	background-image: none;
+	background-size: 1ex 1ex;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 6'%3E%3Cpath d='M1 1L5 5M1 5L5 1' stroke='$f886' strokeWidth='1' fill='none'/%3E%3C/svg%3E");*/
+	opacity: 0.7;
+	border: thin solid #fff2;
+	color: #fff6;
+	background-color: #0002;
+};
+
+form label {
+	display: grid;
+	grid-column: 1 / 2;
+	place-self: center start;
+	whitespace: nowrap;
+	align-content: center;
+} 
+
+form input {
+	grid-column: 2 / 3;
+	place-self: center stretch;
+}
+
+form output {
+    --border: thin solid #fff2;
+    color: #fff6;
+    background-color: #0002;
+    padding: 0.1212em;
+    width: 3.333em;
+    place-self: center end;
+		place-contents: center end;
+    grid-column: 4/5;
+    border-radius: 2px;
+		box-sizing: border-box;
+}
+
+/* ------------------------- form controls ---------- */
+
+fieldset {
+	appearance: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	
+	grid-auto-flow: column;
+}
+
+/* - - - - - button - - - - - */
+
+button.clearbuttonold {
+  -webkit-appearance: none;
+	width: 1em;
+	height: 1em;
+	border-radius: 2.5px;  
+  background-color: #8f83;
+	border: thin solid #8f86;
+  outline: none;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+	box-shadow: outset black 0px 3px 5px;
+	color: #8fca;
+}
+
+button.downloadbutton {
+	display: grid;
+	place-items: center start ;
+	grid-template-columns: 1.5em 1fr;
+	grid-auto-flow: column;
+	width: content;
+	height: auto;
+	place-self: space-around;
+	grid-gap: 0.5em;
+	padding: 0.33em; 
+	border-radius: 0.33em;
+	margin: 1em;
+	padding: 0.333em;
+	grid-gap: 0.333em;
+whitespace: nowrap;
+	-webkit-appearance: none;
+	appearance: none;
+	color: #fff6;
+	border: thin solid #fff5;
+	background-color: #fff3;
+}
+
+button.downloadbutton * {
+	whitespace: nowrap;
+}
+
+/* - - - - - slider - - - - - */
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 3px;
+	margin-top: calc(0.5em - 1.5px);
+	margin-bottom: calc(0.5em - 1.5px);
+  border-radius: 2.5px;  
+  background: #aaa6;
+	--border: thin solid #aaa6;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:active, .slider:focused, .slider:hover {
+	background: #faa8;
+	border: thin solid #faa8;
+	opacity: 1.0;
+}
+
+.slider:active::-webkit-slider-thumb, .slider:focused::-webkit-slider-thumb, .slider:hover::-webkit-slider-thumb {
+	background: #f668;
+	border: thin solid #f66a;
+	box-shadow: 0 0 3 3 #faab;
+	opacity: 1.0;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 18px;
+  border-radius: 3.5px;
+	--border: thin solid #aaac;
+  background: #888c;
+  cursor: pointer;
+}
+
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+/* ------------------------------------------
+scrollbars
+------------------------------------------ */
+
+/* The emerging W3C standard
+   that is currently Firefox-only */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+	height: 10px;
+	border: 3px solid #fff0;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0003;
+	--border-radius: 2.5px;
+	border: 3px solid #0000;
+}
+
+*::-webkit-scrollbar-thumb {
+	border: 3px solid #fff0;
+  background: #fff3;
+  border-radius: 6px;
+	--padding: 2px;
+	--margin: 2px;
+}

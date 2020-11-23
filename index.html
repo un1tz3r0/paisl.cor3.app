@@ -1,133 +1,220 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+	<head>
+		<title>Paisl Generator - paisl.cor3.app</title>
+		<script src="index.js"></script>
+		<meta rel="stylesheet" href="index.css"/>
+	</head>
+	<body>
+	
+<!--  2020 by Victor M. Condino -->
+<main>																																							
+<!--<nav>
+		<span class="maintitle">
+			<span class="logo">
+				
+			</span>
+		</span>
+		<span class="subtitle">
+			Presets
+		</span>
+	</nav>-->
+	<aside class="settings">
+		<form onsubmit="return false;" data-clear="initial">
+			
+			<heading><b>Geometry</b></heading>
+			
+			<input data-clear="initial" data-insert-label="paisl ratio" data-insert-output="true" data-persisted="true" type="range" class="slider" min="0" max="200" value="100" data-scaled-min="0.0" data-scaled-max="1.0" name="ratioslider">
+			
+			<input data-clear="initial" data-persisted="true" type="range" class="slider" min="0" max="360" value="60" data-scaled-min="0.0" data-scaled-max="360.0" data-precision="0" name="angleslider" data-insert-output="true" data-insert-label="paisl angle">
+			
+			<heading><b>Symmetry</b></heading>
+				
+			<input data-clear="initial" data-persisted="true" type="range" class="slider" min="3" max="27" value="3" name="symmetryslider" data-insert-output="true" data-insert-label="symmetry">
+			
+			<input data-clear="initial" data-persisted="true" type="range" class="slider" min="3" max="27" value="3" name="symmetryminslider" data-insert-output="true" data-insert-label="sym min">
+				
+			<input data-persisted="true" type="range" class="slider" min="3" max="27" value="27" name="symmetrymaxslider" data-insert-output="true" data-insert-label="sym max">
+				
+			<heading><b>Hue</b></heading>
+			
+			<input data-persisted="true" type="range" class="slider" min="0" max="100" value="25" data-scaled-min="0.0" data-scaled-max="1.0" name="basehueslider" data-insert-output="true" data-insert-label="base hue">
+				
+				<input data-persisted="true" type="range" class="slider" min="0" max="100" value="0" name="huerangeminslider" data-scaled-min="0.0" data-scaled-max="1.0" data-insert-output="true" data-insert-label="hue min">
+				
+				<input data-persisted="true" type="range" class="slider" min="1" max="100" value="100" name="huerangemaxslider" data-scaled-min="0.0" data-scaled-max="1.0" data-insert-output="true" data-insert-label="hue max">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>#000000</title>
-    <link type="image/x-icon" rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGD4z0ABYBw1gGE0DBhGw4BhWIQBAE5OEAELnjVHAAAAAElFTkSuQmCC">
-    <style>
-        :root {
-            --color: #000000;
-            --color-transparent: #00000022;
-        }
+			
+						<heading><b>Stroke</b></heading>
+			
+			<input data-persisted="true" type="range" class="slider" min="0" max="100" value="10" data-scaled-min="0.0" data-scaled-max="1.0" name="strokealphaslider" data-insert-output="true" data-insert-label="stroke opacity">
+			
+								<input data-persisted="true" type="range" class="slider" min="-100" max="100" value="0" data-scaled-min="-1.0" data-scaled-max="1.0" name="strokelumslider" data-insert-output="true" data-insert-label="stroke luma">
+			
+					<input data-persisted="true" type="range" class="slider" min="0" max="100" value="30" data-scaled-min="0.0" data-scaled-max="1.0" name="strokesatslider" data-insert-output="true" data-insert-label="stroke sat">
 
-        ::selection {
-            background: var(--color-transparent);
-        }
+						<input data-persisted="true" type="range" class="slider" min="0" max="100" value="10" data-scaled-min="0.0" data-scaled-max="10.0" name="strokewidthslider" data-insert-output="true" data-insert-label="stroke width">
 
-        html,
-        body {
-            background: var(--color);
-            height: 100%;
-            margin: 0;
-        }
+			<heading><b>Fill</b></heading>
+			
+			<input data-persisted="true" type="range" class="slider" min="0" max="100" value="10" data-scaled-min="0.0" data-scaled-max="1.0" name="fillalphaslider" data-insert-output="true" data-insert-label="fill opacity">
+			
+								<input data-persisted="true" type="range" class="slider" min="-100" max="100" value="0" data-scaled-min="-1.0" data-scaled-max="1.0" name="filllumslider" data-insert-output="true" data-insert-label="fill luma">
+			
+					<input data-persisted="true" type="range" class="slider" min="0" max="100" value="30" data-scaled-min="0.0" data-scaled-max="1.0" name="fillsatslider" data-insert-output="true" data-insert-label="fill sat">
+			
+			<heading><b>Packing</b></heading>
 
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
+			
+				<input data-persisted="true" type="range" class="slider" min="0" max="100" value="55" name="minsizeslider" data-scaled-min="0.0" data-scaled-max="3.0" data-scale="log" data-insert-output="true" data-insert-label="min. size">
+				
 
-        #color {
-            background: white;
-            color: var(--color);
-            font-size: 2.5rem;
-            font-weight: 300;
-            padding: 2.25rem 3rem;
-            font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-            cursor: text;
-        }
-    </style>
-</head>
+				
+				<input data-persisted="true" type="range" class="slider" min="1" max="12" value="8" name="maxdepthslider" data-insert-output="true" data-insert-label="max depth">
 
-<body>
-    <p id="color">#000000</p>
-    <script>
-        function randomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
-        }
+			
+						<input data-persisted="true" type="range" class="slider" min="-100" max="100" value="10" data-scaled-min="-1.0" data-scaled-max="1.0" name="huegenshiftslider" data-insert-output="true" data-insert-label="hue shift">
+			
 
-        function hslToHex(h, s, l) {
-            h /= 360;
-            s /= 100;
-            l /= 100;
-            var r = void 0,
-                g = void 0,
-                b = void 0;
-            if (s === 0) {
-                r = g = b = l; // achromatic
-            } else {
-                var hue2rgb = function hue2rgb(p, q, t) {
-                    if (t < 0) t += 1;
-                    if (t > 1) t -= 1;
-                    if (t < 1 / 6) return p + (q - p) * 6 * t;
-                    if (t < 1 / 2) return q;
-                    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-                    return p;
-                };
-                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-                var p = 2 * l - q;
-                r = hue2rgb(p, q, h + 1 / 3);
-                g = hue2rgb(p, q, h);
-                b = hue2rgb(p, q, h - 1 / 3);
-            }
-            var toHex = function toHex(x) {
-                var hex = Math.round(x * 255).toString(16);
-                return hex.length === 1 ? '0' + hex : hex;
-            };
-            return '#' + toHex(r) + toHex(g) + toHex(b);
-        }
+			
+			<input data-persisted="true" type="range" class="slider" min="-100" max="100" value="0" data-scaled-min="-1.0" data-scaled-max="1.0" name="lumgenshiftslider" data-insert-output="true" data-insert-label="luma shift">
 
-        window.onload = function () {
-            let stopProp = function (ev) {
-                ev.stopPropagation();
-            }
+				<input data-persisted="true" type="range" class="slider" min="-12" max="12" value="0" data-scaled-min="-6.0" data-scaled-max="6.0" name="symmetrygenshiftslider" data-insert-output="true" data-insert-label="symm shift">
+			
 
-            var colorElement = document.getElementById("color");
-            colorElement.addEventListener("click", stopProp, false);
-            colorElement.addEventListener("mousedown", stopProp, false);
+			<heading><b>Recursion</b></heading>
+						
+				<input data-persisted="true" type="range" class="slider" min="0" max="100" value="40" name="minrecsizeslider" data-scaled-min="0.0" data-scaled-max="3.0" data-scale="log" data-insert-output="true" data-insert-label="min. size">
+				
 
-            var setFavicon = function (hex) {
-                var canvas = document.createElement('canvas');
-                canvas.width = 16;
-                canvas.height = 16;
-                var ctx = canvas.getContext('2d');
-                ctx.fillStyle = hex;
-                ctx.fillRect(0, 0, 16, 16);
-                document.getElementsByTagName('link')[0].href = canvas.toDataURL("image/x-icon");
-            }
+				
+				<input data-persisted="true" type="range" class="slider" min="1" max="10" value="7" name="maxrecdepthslider" data-insert-output="true" data-insert-label="max depth">
+					
+				
+				<input data-persisted="true" type="range" class="slider" min="0" max="200" value="100" data-scaled-min="-1.0" data-scaled-max="1.0" name="huerecshiftslider" data-insert-output="true" data-insert-label="hue shift">
+				
 
-            var setRandomColor = function setRandomColor() {
-                var h = void 0,
-                    s = void 0,
-                    l = void 0;
+				
+				<input data-persisted="true" type="range" class="slider" min="0" max="200" value="100" data-scaled-min="-1.0" data-scaled-max="1.0" name="lumrecshiftslider" data-insert-output="true" data-insert-label="luma shift">
+							
+				<input data-persisted="true" type="range" class="slider" min="-12" max="12" value="0" data-scaled-min="-6.0" data-scaled-max="6.0" name="symmetryrecshiftslider" data-insert-output="true" data-insert-label="sym shift">
+					
+			<heading><b>Size Influence</b></heading>
+						
+				
+				<input data-persisted="true" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="sizehueslider" data-insert-output="true" data-insert-label="size to hue">
+				
 
-                h = randomInt(0, 359);
-                s = randomInt(55, 75);
-                l = randomInt(40, 60);
+				
+				<input data-persisted="true" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="sizelumslider" data-insert-output="true" data-insert-label="size to luma">
+				
 
-                document.documentElement.style.setProperty('--color', 'hsl(' + h + ', ' + s + '%, ' + l + '%)');
-                var hex = hslToHex(h, s, l);
-                document.title = hex;
-                colorElement.innerHTML = hex;
-                document.documentElement.style.setProperty('--color-transparent', hex + '22');
+				
+				<input data-persisted="true" type="range" class="slider" min="-200" max="200" value="0" data-scaled-min="-100.0" data-scaled-max="100.0" name="sizesymslider" data-insert-output="true" data-insert-label="size to sym">
+				
 
-                setFavicon(hex);
-            };
-            setRandomColor();
+				<heading><b>1/Size Influence</b></heading>
 
-            var body = document.getElementsByTagName("body")[0];
-            body.addEventListener("mousedown", function (ev) {
-                ev.preventDefault();
-            });
-            body.addEventListener("click", function () {
-                setRandomColor();
-            }, false);
-        };
-    </script>
-</body>
+				
+				
+				<input data-persisted="true" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="recipsizehueslider" data-insert-output="true" data-insert-label="1/size to hue">
+				
 
+				
+				<input data-persisted="true" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="recipsizelumslider" data-insert-output="true" data-insert-label="1/size to luma">
+				
+
+				
+				<input data-persisted="true" type="range" class="slider" min="-200" max="200" value="0" data-scaled-min="-100.0" data-scaled-max="100.0" name="recipsizesymslider" data-insert-output="true" data-insert-label="1/size to sym">
+			
+		</form>
+	</aside>
+		
+	<!-- draggable vertical pane split -->
+	<div class="colgutter">
+		<svg xmlns='http://www.w3.org/2000/svg' width="4px" height="7px" viewBox="1 1 4 7">
+			<use href="#colhandleicon"/>
+		</svg>
+	</div>
+
+	<!-- the center-right panel showing the output -->
+	<section class="graphics" id="svgviewcontainer" style="display:  grid;
+						grid-template: 1fr / 1fr;
+						place-items: center;
+						width: 100%;
+						height: 100%;">
+		<!-- overlay on top of drawing -->
+		<section>
+			<!-- FIXME: probably move this and additional controls to the nav bar header -->
+			<button onclick="downloadClicked()" class="downloadbutton">
+				<svg id="downloadicon" viewBox="-0.5 -0.5 10.5 12.5" width="1.5em" height="1.5em">
+					<path stroke="#8fcc" stroke-width="0.5" fill="#8fc8" d="M3,0 L7,0 L7,5 L10,5 L5,10 L0,5 L3,5 Z M0,10 L10,10 L10,12 L0,12"></path>
+				</svg>
+				<span>Save to SVG</span>
+			</button>
+		</section>
+		
+		<!-- pan and zoom container -->
+		<section id="svgpanscrollcontainer"
+			data-zoom-on-wheel
+			data-pan-on-drag
+			style="display:  grid;
+						grid-template: 1fr / 1fr;
+						place-items: center;
+						width: 100%;
+						height: 100%;">
+			<!-- rendered graphic content gets placed inside this empty image -->
+			<svg id="drawing" viewBox="-210 -210 420 420" preserveAspectRatio="xMidYMid meet">
+				
+			</svg>
+		</section>
+	</section>
+
+	<!-- draggable vertical pane -->
+	<div class="rowgutter">
+		<svg xmlns='http://www.w3.org/2000/svg' width="7px" height="4px" viewBox="1 1 7 4">
+			<use href="#rowhandleicon"/>
+		</svg>
+	</div>
+
+	<!-- svg source view pane -->
+	<div class="svgoutcontainer">
+		<pre class="svgoutput">
+			SVG source
+		</pre>
+	</div>
+	
+</main>
+
+<svg xmlns='http://www.w3.org/2000/svg' style="display: none">
+	<defs>
+		<symbol id="closeicon" viewBox="-1.5 -1.5 9 9">
+			<path d='M1 1L5 5M1 5L5 1' stroke='#fff6' strokeWidth='1' fill='none'/>
+		</symbol>
+		<symbol id="plusicon" viewBox="-1.5 -1.5 9 9">
+			<path d='M1 2.5L5 2.5M2.5 1L2.5 5' stroke='#fff6' strokeWidth='1' fill='none'/>
+		</symbol>
+		<symbol id="minusicon" viewBox="-1.5 -1.5 9 9">
+			<path d='M1 2.5L5 2.5' stroke='#fff6' strokeWidth='1' fill='none'/>
+		</symbol>
+		<symbol id="colhandleicon" viewBox="0.5 0.5 4 5">
+			<path d='M1 3L4 3M1 1L4 1M1 5L4 5' stroke='#fff6' strokeWidth='1' fill='none'/>
+		</symbol>
+		<symbol id="rowhandleicon" viewBox="0.5 0.5 5 4">
+			<path d='M3 1L3 4M1 1L1 4M5 1L5 4' stroke='#fff6' strokeWidth='1' fill='none'/>
+		</symbol>
+		<!--<defs>
+					<radialGradient id="radialGradient" cx=".5" cy=".5" r=".5">
+						<stop offset="0%" stop-color="white" stop-opacity="0"/>
+						<stop offset="100%" stop-color="white" stop-opacity="1"/>
+					</radialGradient>
+					<mask id="radialMask" maskUnits="objectBoundingBox" x="0" y="0" width="1.0" height="1.0">
+						<circle cx="0" cy="0" r="50%" fill="url(#radialGradient)"/>
+					</mask>
+				</defs>-->
+	</defs>
+</svg>
+
+	</body>
 </html>
+
+
