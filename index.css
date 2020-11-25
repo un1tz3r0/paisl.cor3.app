@@ -269,6 +269,9 @@ form button.clearbutton.enabled {
 	background-color: #0002;
 };
 
+form button.clearbutton:focus {
+}
+
 form label {
 	display: grid;
 	grid-column: 1 / 2;

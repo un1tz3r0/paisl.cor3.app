@@ -426,19 +426,67 @@ function circleCircleIntersectionPoints(c1, c2) {
 		}
 	}
 
-// returns a floating point number rounded to the nearest 10^sigdigs, so roundTo(1.23456, -2) returns 1.230 and roundTo(987.654321, 1) returns 990.0
+// --------------------------------------------------------------------
+// returns a floating point number rounded to the nearest 10^sigdigs, 
+// so roundTo(1.23456, -2) returns 1.230 and roundTo(987.654321, 1)
+// returns 990.0. note that this may, because of the way floating point
+// numbers are stored, still return values which when converted to 
+// strings have more than sigdigs decimal places. see roundToStr below
+// for a routine that is used when rendering SVG tags to limit numerical
+// precision when converting to textual attributes.
+// --------------------------------------------------------------------
 
 function roundTo(num, sigdigs=-5) {
 	if(sigdigs < 0) {
-		return Math.trunc(num * Math.pow(10, -sigdigs)) / Math.pow(10, -sigdigs);
-	}
-	else
-	{
-		return Math.trunc(num / Math.pow(10, sigdigs)) * Math.pow(10, sigdigs);
+		return Math.trunc(num * Math.pow(10, -sigdigs)+0.5) / Math.pow(10, -sigdigs);
+	} else {
+		return Math.trunc(num / Math.pow(10, sigdigs)+0.5) * Math.pow(10, sigdigs);
 	}
 }
 
-// cartesian and polar coordinate conversion
+function roundToStr(num, decimals=3) {
+	return Number(num).toPrecision(decimals);
+}
+
+// --------------------------------------------------------------------
+// angular unit conversions: degrees, radians and revolutions
+// --------------------------------------------------------------------
+
+function degToRad(deg)
+{
+	return (deg / 180.0)*Math.PI;
+}
+
+function radToDeg(rad)
+{
+	return (rad / Math.PI)*180.0;
+}
+
+function degToRev(deg)
+{
+	return (deg / 360.0);
+}
+
+function radToRev(rad)
+{
+	return rad/(Math.PI*2);
+}
+
+function revToDeg(rev)
+{
+	return (rev * 360.0);
+}
+
+function revToRad(rev)
+{
+	return rev * Math.PI*2;
+}
+
+// --------------------------------------------------------------------
+// cartesian and polar coordinate conversion and manipulation
+// these routines all take and return angles in radians, since they
+// are low level and make direct use of trig functions.
+// --------------------------------------------------------------------
 
 function angle(x1, y1, x2, y2) {
 	return Math.atan2(y2 - y1, x2 - x1);
@@ -452,6 +500,9 @@ function heading(x, y, a, d) {
 	return {x: Math.cos(a) * d + x, y: Math.sin(a) * d + y};
 }
 
+// cartesian coordinate operations based on the above primitive conversions,
+// these
+
 function rotate(x, y, a, xorigin=0.0, yorigin=0.0)
 {
 	var ox, oy, oa, od;
@@ -461,12 +512,18 @@ function rotate(x, y, a, xorigin=0.0, yorigin=0.0)
 	return ret;
 }
 
+// affine transform which projects 2d coordinates rotated and scaled
+// based on a line segment, the two endpoints of which are mapped to
+// the origin and x=0,y=1 respectively
+
 function towards(x1, y1, x2, y2, u, v) {
 	var ang = angle(x1, y1, x2, y2);
 	var a = heading(x1, y1, ang, u);
 	var b = heading(a.x, a.y, ang + Math.PI / 2.0, v);
 	return b;
 }
+
+// dot and cross product operations for 2d vectors
 
 function dot(ax, ay, bx, by, ox=0.0, oy=0.0) {
 	var x1 = ax - ox, x2 = bx - ox;
@@ -479,6 +536,10 @@ function cross(ax, ay, bx, by, ox=0.0, oy=0.0) {
 	var y1 = ay - oy, y2 = by - oy;
 	return x1 * y2 - y1 * x2;
 }
+
+// --------------------------------------------------------------------
+// SVG d='...' path string rendering, for circles, lines and arcs
+// --------------------------------------------------------------------
 
 function mkcircle([cx, cy], r)
 {
@@ -853,6 +914,82 @@ apollonius = function (c1, c2, c3) {
 		return null;
 	}
 }
+
+/* ---------------------------------------------------------------------
+PrioQueue - priority sorted random access collection for queuing rendering
+tasks which must be done in specific order due to layer compositing
+* ---------------------------------------------------------------------- */
+
+class PrioQueue {
+  constructor() {
+    this.prios = new Map();
+  }
+  get(prio) {
+    if(!this.prios.has(prio)) {
+      this.prios.set(prio, new Array()); }
+    return this.prios.get(prio);
+  }
+  insertlast(prio, value) {
+    this.get(prio).push(value);
+  }
+  insertfirst(prio, value) {
+    this.get(prio).unshift(value);
+  }
+  remove(prio=null, value=null) {
+    if(prio==null && value==null) {
+      this.prios.clear();
+    }
+    else if(value==null && prio!=null) {
+      if(this.prios.has(prio))
+        this.prios.delete(prio);
+    }
+    else if(value!=null && prio==null) {
+      this.prios.elems().each((prio, vals)=>{
+        vals.remove(value);
+        if(vals.length <= 0) {
+          this.prios.delete(prio);
+        }
+      });
+    } else {
+      if(this.prios.has(prio))
+      {
+        this.prios.get(prio).delete(value);
+      }
+    }
+  }
+  minprio() {
+    return Array.from(this.prios.keys()).sort((l,r) => l>r?1:l<r?-1:0 )[0];
+  }
+  maxprio() {
+    return Array.from(this.prios.keys()).sort((l,r) => l>r?-1:l<r?1:0 )[0];
+  }
+  length() {
+    var total = 0;
+    Array.from(this.prios.values()).each((vals)=>{total=total+vals.length})
+    return total;
+  }
+  pop() {
+    if(this.prios.size <= 0)
+      return [null, null];
+    var prio = this.maxprio();
+    var vals = this.prios.get(prio);
+    var val = vals.pop();
+    if(vals.length <= 0)
+      this.prios.delete(prio);
+    return [prio, val];
+  }
+  shift() {
+    if(this.prios.size <= 0)
+      return [null, null];
+    var prio = this.minprio();
+    var vals = this.prios.get(prio);
+    var val = vals.shift();
+    if(vals.length <= 0)
+      this.prios.delete(prio);
+    return [prio, val];
+  }
+}
+
 
 /* ---------------------------------------------------------------------
 WorkQueue - cooperative background rendering task management
@@ -1273,7 +1410,12 @@ function refresh()
 								fillhue: calchue(circle, gapdepth, recdepth), 
 								fillval: calcluma(circle, gapdepth, recdepth) + filllum,
 								fillsat: fillsat,
-								fillalpha: fillalpha
+								fillalpha: fillalpha,
+								extra: {
+									circle: circle, 
+									gapdepth: gapdepth, 
+									recdepth: recdepth
+								}
 							});
 					curupdate.schedule(()=>{group.insertAdjacentElement('beforeend', newgroup);});
 				}
@@ -2018,6 +2160,11 @@ function setupinputs(refreshfn)
 	
 	for(let inputel of document.querySelectorAll("input[data-persisted]")) {
 		inputel.addEventListener("change", function(evt) {		
+			refreshfn();
+			storeinputs();
+			updateclearbuttons();
+		}, false);
+		inputel.addEventListener("input", function(evt) {		
 			refreshfn();
 			storeinputs();
 			updateclearbuttons();
