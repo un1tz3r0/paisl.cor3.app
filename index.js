@@ -670,13 +670,13 @@ function createSVGArrow(svg, x1, y1, x2, y2, options)
 			sat=option("sat", option("hue") != null ? 1 : 0), 
 			val=option("val", 1), 
 			edgehue=option("edgehue", hue), 
-			edgesat=option("edgesat", option("edgehue") != null ? 1 : 0), 		
-			edgeval=option("edgeval", option("edgehue") != null ? 1 : 0),
+			edgesat=option("edgesat", sat != null ? sat : option("edgehue") != null ? 1 : 0), 		
+			edgeval=option("edgeval", val != null ? val : option("edgehue") != null ? 1 : 0),
 						edgealpha=option("edgealpha", 1.0),
 
 			fillhue=option("fillhue", hue), 
-			fillsat=option("fillsat", option("fillhue") != null ? 1 : 0), 		
-			fillval=option("fillval", option("fillhue") != null ? 1 : 0),
+			fillsat=option("fillsat", sat != null ? sat : option("fillhue") != null ? 1 : 0), 		
+			fillval=option("fillval", val != null ? val : option("fillhue") != null ? 1 : 0),
 			fillalpha=option("fillalpha", 0.0),
 			width=option("width", 1.0),
 			filled=option("filled", fillalpha > 0.0 ? true : false);
@@ -694,7 +694,7 @@ function createSVGArrow(svg, x1, y1, x2, y2, options)
 		if(strokecolor != null) {
 			el.setAttribute("stroke", strokecolor);
 		}
-		el.setAttribute("fill-opacity", fillalpha);
+		//el.setAttribute("fill-opacity", fillalpha);
 		if(fillcolor != null) { 
 			el.setAttribute("fill", fillcolor);
 		} else {
@@ -1198,34 +1198,6 @@ var lastupdate = null;
 
 function refresh()
 {
-	let svg = document.getElementById("drawing");
-	let oldgrp = svg.getElementsByTagName("g")[0];
-	let newgrp = document.createElementNS("http://www.w3.org/2000/svg", "g");
-	let fggrp = document.createElementNS("http://www.w3.org/2000/svg", "g");
-	let bggrp = document.createElementNS("http://www.w3.org/2000/svg", "g");
-	let allcircles = [];
-
-	if(lastupdate != null)
-	{
-		lastupdate.cancel();
-	}
-	if(lastrefresh != null)
-	{
-		lastrefresh.cancel();
-	}
-	var curupdate = new AnimationQueue();
-	var currefresh = new WorkQueue();
-	lastrefresh = currefresh;
-	lastupdate = curupdate;
-	
-	newgrp.appendChild(bggrp);
-	newgrp.appendChild(fggrp);
-
-	if(oldgrp == null)
-		svg.appendChild(newgrp);
-	else
-		svg.replaceChild(newgrp, oldgrp);
-
 	var inputs = getinputs();
 	
 	console.info("refresh: inputs = ", inputs);
@@ -1285,7 +1257,36 @@ function refresh()
 	{
 		return fwrap(basehue+huegenshift*(maxdepth-gapdepth)+huerecshift*(maxrecdepth-recdepth)+sizetohue*circle.r + recipsizetohue * 1/circle.r, huerangemin, huerangemax);
 	}
-		
+	
+	let svg = document.getElementById("drawing");
+	let oldgrp = svg.getElementsByTagName("g")[0];
+	let newgrp = document.createElementNS("http://www.w3.org/2000/svg", "g");
+	let fggrp = document.createElementNS("http://www.w3.org/2000/svg", "g");
+	let bggrp = document.createElementNS("http://www.w3.org/2000/svg", "g");
+	let allcircles = [];
+
+	if(lastupdate != null)
+	{
+		lastupdate.cancel();
+	}
+	if(lastrefresh != null)
+	{
+		lastrefresh.cancel();
+	}
+	var curupdate = new AnimationQueue();
+	var currefresh = new WorkQueue();
+	lastrefresh = currefresh;
+	lastupdate = curupdate;
+	
+	newgrp.appendChild(bggrp);
+	newgrp.appendChild(fggrp);
+
+	if(oldgrp == null)
+		svg.appendChild(newgrp);
+	else
+		svg.replaceChild(newgrp, oldgrp);
+
+	
 	function newrecurse(circle, gapdepth, recdepth, parent, group)
 	{
 		var recursecb, gapcb, newgap, gelem;
