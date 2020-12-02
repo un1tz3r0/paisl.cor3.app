@@ -1,19 +1,72 @@
 <html>
 	<head>
 		<title>Paisl Generator - paisl.cor3.app</title>
-		<script src="index.js"></script>
+		<script src="index.js" async="true"></script>
 		<link rel="stylesheet" href="index.css"/>
 	</head>
 	<body>
+
+	<div id="loading" class="loading" style="z-index: 100; display: grid; padding: 0px; margin: 0px; box-sizing: border-box; background-color: #333; width: 100vw; height: 100vh; overflow: hidden; place-items: center; place-self: center;">
+		
+<svg xmlns="http://www.w3.org/2000/svg" width="48.0px" height="48.0px" viewBox="0 0 16.0 16.0" version="1.1" id="loadingspingraphic">
+    <g transform="translate(-0.5,-0.5)">
+      <circle style="fill:#888;fill-opacity:0.0;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stop-color:black" id="path446466" cx="8.5" cy="8.5" r="8" />
+      <ellipse style="fill:#888;stroke:#fff;stroke-width:1.0;stroke-linecap:round;stroke-linejoin:round;stop-color:black" id="path446456" cx="8.5" cy="3.5" rx="2" ry="2" />
+      <ellipse style="fill:#888;stroke:#fff;stroke-width:1.0;stroke-linecap:round;stroke-linejoin:round;stop-color:black" id="ellipse446462" cx="-11.6112" cy="-1.88877" rx="2" ry="2" transform="rotate(-120)" />
+      <ellipse style="fill:#888;stroke:#fff;stroke-width:1.0;stroke-linecap:round;stroke-linejoin:round;stop-color:black" id="ellipse446464" cx="3.11125" cy="-16.6112" rx="2" ry="2" transform="rotate(120)" />
+ 			<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="rotate"
+                          from="0 8.5 8.5"
+                          to="360 8.5 8.5"
+                          dur="3s"
+                          repeatCount="indefinite"/>      
+    </g>
+</svg>
+
+	</div>
 	
-<!--  2020 by Victor M. Condino -->
+<!--  Copyright 2020 by Victor M. Condino, all rights reserved. -->
+
 <main>
 	<nav>
 		<span class="maintitle">
 			<span class="logo">
 				Paisl Generator
 			</span>
-		</span>
+        </span>
+        
+		<section class="actions">
+			<!-- FIXME: probably move this and additional controls to the nav bar header -->
+			<button onclick="downloadClicked()" class="downloadbutton">
+				<svg id="downloadicon" viewBox="-0.5 -0.5 10.5 12.5" width="1.5em" height="1.5em">
+					<path stroke="#8fcc" stroke-width="0.5" fill="#8fc8" d="M3,0 L7,0 L7,5 L10,5 L5,10 L0,5 L3,5 Z M0,10 L10,10 L10,12 L0,12"></path>
+				</svg>
+				<span>Save to SVG</span>
+			</button>
+			<button id="linkbutton" class="linkbutton">
+				<svg id="showlinkbuttonicon" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 12 9" version="1.1">
+    				<path style="fill:#8cf4;stroke:#8cfc;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5;" d="m 6.35838,4.09989 c 0.0272,0.12824 0.0416,0.26212 0.0416,0.40011 0,1.05292 -0.84708,1.9 -1.9,1.9 h -1 c -1.05292,0 -1.9,-0.84708 -1.9,-1.9 0,-1.05292 0.84708,-1.9 1.9,-1.9 h 0.24427 a 0.6,0.6 0 1 0 0,-1.2 h -0.24427 c -1.71708,0 -3.1,1.38292 -3.1,3.1 0,1.71708 1.38292,3.1 3.1,3.1 h 1 c 1.71708,0 3.1,-1.38292 3.1,-3.1 0,-0.22202 -0.0232,-0.43902 -0.0677,-0.64883 a 0.6,0.6 0 1 0 -1.17394,0.24872 z m -0.71676,0.80022 c -0.0272,-0.12824 -0.0416,-0.26212 -0.0416,-0.40011 0,-1.05292 0.84708,-1.9 1.9,-1.9 h 1 c 1.05292,0 1.9,0.84708 1.9,1.9 0,1.05292 -0.84708,1.9 -1.9,1.9 h -0.24427 a 0.6,0.6 0 1 0 0,1.2 h 0.24427 c 1.7171,0 3.1,-1.38292 3.1,-3.1 0,-1.71708 -1.3829,-3.1 -3.1,-3.1 h -1 c -1.71708,0 -3.1,1.38292 -3.1,3.1 0,0.22202 0.0232,0.43902 0.0677,0.64883 a 0.6,0.6 0 1 0 1.17394,-0.24872 z" />
+				</svg>
+				<span id="showlinkbuttontext">Link to Paisl</span>
+	            <svg id="copylinkbuttonicon" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 12 12" version="1.1">
+					<path style="fill:#8cf8;stroke:#8cfc;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.25;" d="m 0 0 h 7 v 4 h -2 v -2 h -3 v 3 h 2 v 2 h -4 v -7 m 5 5 h 7 v 7 h -7 v -7 z m 7 7 h 3 v 3 h -3 v -3 z" />
+				</svg>
+				<span id="copylinkbuttontext">Copy</span>
+				<svg id="copiedlinkbuttonicon" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 12 12" version="1.1">
+					<path style="fill:#8cf8;stroke:#8cfc;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.25;" d="m 0 0 h 7 v 4 h -2 v -2 h -3 v 3 h 2 v 2 h -4 v -7 m 5 5 h 7 v 7 h -7 v -7 z m 7 7 h 3 v 3 h -3 v -3 z" />
+				</svg>
+				<span id="copiedlinkbuttontext">Link Copied</span>	
+			</button>
+			<span class="linkrevealcontainer">
+				<span class="linkreveal" id="linkreveal">
+					<span class="linkurlbox" id="linkurl">
+					  nothing to see here
+					</span>
+				</span>
+			</span>
+		</section>
+
 		<!--<span class="subtitle">
 			Presets
 		</span>-->
@@ -23,108 +76,85 @@
 			
 			<heading><b>Geometry</b></heading>
 			
-			<input data-clear="initial" data-insert-label="paisl ratio" data-insert-output="true" data-persisted="true" type="range" class="slider" min="0" max="200" value="100" data-scaled-min="0.0" data-scaled-max="1.0" name="ratioslider">
+			<input data-clear="initial" data-insert-label="paisl ratio" data-tip="controls the width of the first circle of the tail" data-insert-output="true" data-persisted="true" type="range" class="slider" min="0" max="200" value="100" data-scaled-min="0.0" data-scaled-max="1.0" name="ratioslider">
 			
-			<input data-clear="initial" data-persisted="true" type="range" class="slider" min="0" max="360" value="60" data-scaled-min="0.0" data-scaled-max="360.0" data-precision="0" name="angleslider" data-insert-output="true" data-insert-label="paisl angle">
+			<input data-clear="initial" data-tip="controls the position and curvature of the tail" data-persisted="true" type="range" class="slider" min="0" max="360" value="60" data-scaled-min="0.0" data-scaled-max="360.0" data-precision="0" name="angleslider" data-insert-output="true" data-insert-label="paisl angle">
 			
 			<heading><b>Symmetry</b></heading>
 				
-			<input data-clear="initial" data-persisted="true" type="range" class="slider" min="3" max="27" value="3" name="symmetryslider" data-insert-output="true" data-insert-label="symmetry">
+			<input data-clear="initial" data-tip="controls the number of smaller circles are placed inside each circle upon recursion" data-persisted="true" type="range" class="slider" min="3" max="27" value="3" name="symmetryslider" data-insert-output="true" data-insert-label="symmetry">
 			
-			<input data-clear="initial" data-persisted="true" type="range" class="slider" min="3" max="27" value="3" name="symmetryminslider" data-insert-output="true" data-insert-label="sym min">
+			<input data-clear="initial" data-tip="lower bound for adjustments to symmetry" data-persisted="true" type="range" class="slider" min="3" max="27" value="3" name="symmetryminslider" data-insert-output="true" data-insert-label="sym min">
 				
-			<input data-persisted="true" type="range" class="slider" min="3" max="27" value="27" name="symmetrymaxslider" data-insert-output="true" data-insert-label="sym max">
+			<input data-persisted="true" data-tip="upper bound for adjustments to symmetry" type="range" class="slider" min="3" max="27" value="27" name="symmetrymaxslider" data-insert-output="true" data-insert-label="sym max">
 				
 			<heading><b>Hue</b></heading>
 			
-			<input data-persisted="true" type="range" class="slider" min="0" max="100" value="25" data-scaled-min="0.0" data-scaled-max="1.0" name="basehueslider" data-insert-output="true" data-insert-label="base hue">
+			<input data-persisted="true" data-tip="initial hue value" data-refresh="onlycolor" type="range" class="slider" min="0" max="100" value="25" data-scaled-min="0.0" data-scaled-max="1.0" name="basehueslider" data-insert-output="true" data-insert-label="base hue">
 				
-				<input data-persisted="true" type="range" class="slider" min="0" max="100" value="0" name="huerangeminslider" data-scaled-min="0.0" data-scaled-max="1.0" data-insert-output="true" data-insert-label="hue min">
+			<input data-persisted="true" data-tip="lower bound for adjustments to hue" data-refresh="onlycolor" type="range" class="slider" min="0" max="100" value="0" name="huerangeminslider" data-scaled-min="0.0" data-scaled-max="1.0" data-insert-output="true" data-insert-label="hue min">
 				
-				<input data-persisted="true" type="range" class="slider" min="1" max="100" value="100" name="huerangemaxslider" data-scaled-min="0.0" data-scaled-max="1.0" data-insert-output="true" data-insert-label="hue max">
+			<input data-persisted="true" data-tip="upper bound for adjustments to hue" data-refresh="onlycolor" type="range" class="slider" min="1" max="100" value="100" name="huerangemaxslider" data-scaled-min="0.0" data-scaled-max="1.0" data-insert-output="true" data-insert-label="hue max">
 
+			<heading><b>Stroke</b></heading>
 			
-						<heading><b>Stroke</b></heading>
+			<input data-persisted="true" data-tip="transparency value for shape outlines" data-refresh="onlycolor" type="range" class="slider" min="0" max="100" value="10" data-scaled-min="0.0" data-scaled-max="1.0" name="strokealphaslider" data-insert-output="true" data-insert-label="stroke opacity">
 			
-			<input data-persisted="true" type="range" class="slider" min="0" max="100" value="10" data-scaled-min="0.0" data-scaled-max="1.0" name="strokealphaslider" data-insert-output="true" data-insert-label="stroke opacity">
+			<input data-persisted="true" data-tip="adjusts brightness of all outlines" data-refresh="onlycolor" type="range" class="slider" min="-100" max="100" value="0" data-scaled-min="-1.0" data-scaled-max="1.0" name="strokelumslider" data-insert-output="true" data-insert-label="stroke luma">
 			
-								<input data-persisted="true" type="range" class="slider" min="-100" max="100" value="0" data-scaled-min="-1.0" data-scaled-max="1.0" name="strokelumslider" data-insert-output="true" data-insert-label="stroke luma">
-			
-					<input data-persisted="true" type="range" class="slider" min="0" max="100" value="30" data-scaled-min="0.0" data-scaled-max="1.0" name="strokesatslider" data-insert-output="true" data-insert-label="stroke sat">
+			<input data-persisted="true" data-tip="color saturation of outlines" data-refresh="onlycolor" type="range" class="slider" min="0" max="100" value="30" data-scaled-min="0.0" data-scaled-max="1.0" name="strokesatslider" data-insert-output="true" data-insert-label="stroke sat">
 
-						<input data-persisted="true" type="range" class="slider" min="0" max="100" value="10" data-scaled-min="0.0" data-scaled-max="10.0" name="strokewidthslider" data-insert-output="true" data-insert-label="stroke width">
+			<input data-persisted="true" data-tip="thickness of outlines in pixels" type="range" class="slider" min="0" max="100" value="10" data-scaled-min="0.0" data-scaled-max="10.0" name="strokewidthslider" data-insert-output="true" data-insert-label="stroke width">
 
 			<heading><b>Fill</b></heading>
 			
-			<input data-persisted="true" type="range" class="slider" min="0" max="100" value="10" data-scaled-min="0.0" data-scaled-max="1.0" name="fillalphaslider" data-insert-output="true" data-insert-label="fill opacity">
+			<input data-refresh="onlycolor" data-tip="transparency value for shape interiors" data-persisted="true" type="range" class="slider" min="0" max="100" value="10" data-scaled-min="0.0" data-scaled-max="1.0" name="fillalphaslider" data-insert-output="true" data-insert-label="fill opacity">
 			
-								<input data-persisted="true" type="range" class="slider" min="-100" max="100" value="0" data-scaled-min="-1.0" data-scaled-max="1.0" name="filllumslider" data-insert-output="true" data-insert-label="fill luma">
+			<input data-refresh="onlycolor" data-tip="adjusts brightness of all shape interiors" data-persisted="true" type="range" class="slider" min="-100" max="100" value="0" data-scaled-min="-1.0" data-scaled-max="1.0" name="filllumslider" data-insert-output="true" data-insert-label="fill luma">
 			
-					<input data-persisted="true" type="range" class="slider" min="0" max="100" value="30" data-scaled-min="0.0" data-scaled-max="1.0" name="fillsatslider" data-insert-output="true" data-insert-label="fill sat">
+			<input data-refresh="onlycolor" data-tip="color saturation of shape interiors" data-persisted="true" type="range" class="slider" min="0" max="100" value="30" data-scaled-min="0.0" data-scaled-max="1.0" name="fillsatslider" data-insert-output="true" data-insert-label="fill sat">
 			
 			<heading><b>Packing</b></heading>
 
 			
-				<input data-persisted="true" type="range" class="slider" min="0" max="100" value="55" name="minsizeslider" data-scaled-min="0.0" data-scaled-max="3.0" data-scale="log" data-insert-output="true" data-insert-label="min. size">
-				
+			<input data-persisted="true" type="range" class="slider" min="0" max="100" value="55" name="minsizeslider" data-scaled-min="0.0" data-scaled-max="3.0" data-scale="log" data-insert-output="true" data-insert-label="min. size">
 
-				
-				<input data-persisted="true" type="range" class="slider" min="1" max="12" value="8" name="maxdepthslider" data-insert-output="true" data-insert-label="max depth">
+			<input data-persisted="true" type="range" class="slider" min="1" max="12" value="8" name="maxdepthslider" data-insert-output="true" data-insert-label="max depth">
 
-			
-						<input data-persisted="true" type="range" class="slider" min="-100" max="100" value="10" data-scaled-min="-1.0" data-scaled-max="1.0" name="huegenshiftslider" data-insert-output="true" data-insert-label="hue shift">
-			
+			<input data-persisted="true" data-refresh="onlycolor" type="range" class="slider" min="-100" max="100" value="10" data-scaled-min="-1.0" data-scaled-max="1.0" name="huegenshiftslider" data-insert-output="true" data-insert-label="hue shift">
 
-			
-			<input data-persisted="true" type="range" class="slider" min="-100" max="100" value="0" data-scaled-min="-1.0" data-scaled-max="1.0" name="lumgenshiftslider" data-insert-output="true" data-insert-label="luma shift">
+			<input data-persisted="true" data-refresh="onlycolor" type="range" class="slider" min="-100" max="100" value="0" data-scaled-min="-1.0" data-scaled-max="1.0" name="lumgenshiftslider" data-insert-output="true" data-insert-label="luma shift">
 
-				<input data-persisted="true" type="range" class="slider" min="-12" max="12" value="0" data-scaled-min="-6.0" data-scaled-max="6.0" name="symmetrygenshiftslider" data-insert-output="true" data-insert-label="symm shift">
+			<input data-persisted="true" type="range" class="slider" min="-12" max="12" value="0" data-scaled-min="-6.0" data-scaled-max="6.0" name="symmetrygenshiftslider" data-insert-output="true" data-insert-label="symm shift">
 			
 
 			<heading><b>Recursion</b></heading>
 						
-				<input data-persisted="true" type="range" class="slider" min="0" max="100" value="40" name="minrecsizeslider" data-scaled-min="0.0" data-scaled-max="3.0" data-scale="log" data-insert-output="true" data-insert-label="min. size">
-				
+			<input data-persisted="true" type="range" class="slider" min="0" max="100" value="40" name="minrecsizeslider" data-scaled-min="0.0" data-scaled-max="3.0" data-scale="log" data-insert-output="true" data-insert-label="min. size">
 
-				
-				<input data-persisted="true" type="range" class="slider" min="1" max="10" value="7" name="maxrecdepthslider" data-insert-output="true" data-insert-label="max depth">
-					
-				
-				<input data-persisted="true" type="range" class="slider" min="0" max="200" value="100" data-scaled-min="-1.0" data-scaled-max="1.0" name="huerecshiftslider" data-insert-output="true" data-insert-label="hue shift">
-				
+			<input data-persisted="true" type="range" class="slider" min="1" max="10" value="7" name="maxrecdepthslider" data-insert-output="true" data-insert-label="max depth">
 
-				
-				<input data-persisted="true" type="range" class="slider" min="0" max="200" value="100" data-scaled-min="-1.0" data-scaled-max="1.0" name="lumrecshiftslider" data-insert-output="true" data-insert-label="luma shift">
-							
-				<input data-persisted="true" type="range" class="slider" min="-12" max="12" value="0" data-scaled-min="-6.0" data-scaled-max="6.0" name="symmetryrecshiftslider" data-insert-output="true" data-insert-label="sym shift">
+			<input data-persisted="true" data-refresh="onlycolor" type="range" class="slider" min="0" max="200" value="100" data-scaled-min="-1.0" data-scaled-max="1.0" name="huerecshiftslider" data-insert-output="true" data-insert-label="hue shift">
+
+			<input data-persisted="true" data-refresh="onlycolor" type="range" class="slider" min="0" max="200" value="100" data-scaled-min="-1.0" data-scaled-max="1.0" name="lumrecshiftslider" data-insert-output="true" data-insert-label="luma shift">
+
+			<input data-persisted="true" type="range" class="slider" min="-12" max="12" value="0" data-scaled-min="-6.0" data-scaled-max="6.0" name="symmetryrecshiftslider" data-insert-output="true" data-insert-label="sym shift">
 					
 			<heading><b>Size Influence</b></heading>
-						
-				
-				<input data-persisted="true" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="sizehueslider" data-insert-output="true" data-insert-label="size to hue">
-				
+			
+			<input data-persisted="true" data-refresh="onlycolor" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="sizehueslider" data-insert-output="true" data-insert-label="size to hue">
 
-				
-				<input data-persisted="true" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="sizelumslider" data-insert-output="true" data-insert-label="size to luma">
-				
+			<input data-persisted="true" data-refresh="onlycolor" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="sizelumslider" data-insert-output="true" data-insert-label="size to luma">
 
-				
-				<input data-persisted="true" type="range" class="slider" min="-200" max="200" value="0" data-scaled-min="-100.0" data-scaled-max="100.0" name="sizesymslider" data-insert-output="true" data-insert-label="size to sym">
-				
+			<input data-persisted="true" type="range" class="slider" min="-200" max="200" value="0" data-scaled-min="-100.0" data-scaled-max="100.0" name="sizesymslider" data-insert-output="true" data-insert-label="size to sym">				
 
-				<heading><b>1/Size Influence</b></heading>
+			<heading><b>1/Size Influence</b></heading>
 
-				
-				
-				<input data-persisted="true" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="recipsizehueslider" data-insert-output="true" data-insert-label="1/size to hue">
-				
+			<input data-persisted="true" data-refresh="onlycolor" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="recipsizehueslider" data-insert-output="true" data-insert-label="1/size to hue">
 
-				
-				<input data-persisted="true" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="recipsizelumslider" data-insert-output="true" data-insert-label="1/size to luma">
-				
+			<input data-persisted="true" data-refresh="onlycolor" type="range" class="slider" min="-400" max="400" value="0" data-scaled-min="-4.0" data-scaled-max="4.0" name="recipsizelumslider" data-insert-output="true" data-insert-label="1/size to luma">
 
-				
-				<input data-persisted="true" type="range" class="slider" min="-200" max="200" value="0" data-scaled-min="-100.0" data-scaled-max="100.0" name="recipsizesymslider" data-insert-output="true" data-insert-label="1/size to sym">
+			<input data-persisted="true" type="range" class="slider" min="-200" max="200" value="0" data-scaled-min="-100.0" data-scaled-max="100.0" name="recipsizesymslider" data-insert-output="true" data-insert-label="1/size to sym">
 			
 		</form>
 	</aside>
@@ -142,16 +172,6 @@
 						place-items: center;
 						width: 100%;
 						height: 100%;">
-		<!-- overlay on top of drawing -->
-		<section>
-			<!-- FIXME: probably move this and additional controls to the nav bar header -->
-			<button onclick="downloadClicked()" class="downloadbutton">
-				<svg id="downloadicon" viewBox="-0.5 -0.5 10.5 12.5" width="1.5em" height="1.5em">
-					<path stroke="#8fcc" stroke-width="0.5" fill="#8fc8" d="M3,0 L7,0 L7,5 L10,5 L5,10 L0,5 L3,5 Z M0,10 L10,10 L10,12 L0,12"></path>
-				</svg>
-				<span>Save to SVG</span>
-			</button>
-		</section>
 		
 		<!-- pan and zoom container -->
 		<section id="svgpanscrollcontainer"
@@ -167,6 +187,9 @@
 				
 			</svg>
 		</section>
+
+		<!-- actions were previously here -->
+
 	</section>
 
 	<!-- draggable vertical pane -->

@@ -1,2 +1,4 @@
 .git
 color.gif
+*~
+__pycache__
