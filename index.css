@@ -11,19 +11,19 @@
 
 * {
 	font-family: 'IBM Plex Sans', sans-serif;
-	font-family: 'IBM Plex Sans Condensed', sans-serif;
+	/*font-family: 'IBM Plex Sans Condensed', sans-serif;*/
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
 }
 
 *.loading {
-	transition: opacity 1s ease;
+	transition: opacity 1s ease 0.5s;
 }
 
 *.loading > svg {
-  transform: scale(1.0, 1.0);
-  transition: transform 1s ease;
+  transform: scale(3.0, 3.0);
+  transition: transform 1s ease 0.5s;
 }
 
 *.loading.finished {

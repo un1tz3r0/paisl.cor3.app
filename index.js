@@ -1236,6 +1236,9 @@ class AnimationQueue {
 	}
 }
 
+// --------------------------------------------------------------------------
+// fast, unique ids for generated elements
+
 // store the last refresh operation's queue in order that we may interrupt it if another refresh is required before it finishes
 var lastrefresh = null;
 var lastupdate = null;
@@ -1344,11 +1347,30 @@ function refresh(onlycolor = false)
 
 	if(onlycolor)
 	{
+		// when refresh(onlycolor) is called with onlycolor=true, we only need to 
+		// update the stroke and fill colors of the existing circles, and can 
+		// avoid recalculating the actual positions and radii since no parameters
+		// which would affect the outer shape or inner symmetry should have changed.
+		// this can also take place while we are still in the process of generating
+		// the elements for a previous frame. basically on each full refresh we 
+		// clear an array into which we place elements as they are generated, along
+		// with storing the parameters from which the colors are calculated. 
+		// when the color parameters change, we first update the globals with 
+		// the new parameters in case we are in the middle of a full refresh. the
+		// full refresh code which generates the geometry elements calls the same
+		// global variable callback that we set here to set the colors for each 
+		// newly created element, so the rest of the refresh will use the new
+		// colors. we handle the elements already created during a mid-refresh 
+		// color-only update by then iterating through the array of generated 
+		// elements above, calling the same function to update their colors using
+		// the cached properties
+		
         requestAnimationFrame((frametime)=>{
-        	for(let el of lastelements) {
-        	  curupdatecolor(el);
-            }
-            updatesourcepane();
+        	for(let el of lastelements)
+        	{
+        	  	curupdatecolor(el);
+          }
+          updatesourcepane();
         });
 		return;
 	}
@@ -1520,7 +1542,7 @@ function refresh(onlycolor = false)
 							lastelements.push(el);
 							curupdatecolor(el);
 							group.insertAdjacentElement('beforeend', newgroup);
-					    });
+					  });
 				}
 			}
 		}
