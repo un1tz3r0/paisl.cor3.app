@@ -461,11 +461,6 @@ button.linkbutton {
 	padding: 0.333em;
 	grid-gap: 0.333em;
 	white-space: nowrap;
-	-webkit-appearance: none;
-	appearance: none;
-	color: #fff6;
-	border: none;
-	background-color: transparent;
 }
 
 button.linkbutton * {
@@ -479,7 +474,7 @@ button.linkbutton > #copylinkbuttonicon, button.linkbutton > #copylinkbuttontext
 button.linkbutton > #copiedlinkbuttonicon, button.linkbutton > #copiedlinkbuttontext {
 	display: none;
 }
-
+/*
 
 button.linkbutton.linkshown > #copylinkbuttonicon, 
 button.linkbutton.linkshown > #copylinkbuttontext {
@@ -549,7 +544,7 @@ button.copybutton {
 	height: auto;
 	place-self: end;
 	border-radius: 0.33em;
-	/* margin: 1em; */
+	// margin: 1em;
 	padding: 0.333em;
 	grid-gap: 0.333em;
 	border-radius: 0.33em;
@@ -561,11 +556,32 @@ button.copybutton {
 	border: none;
 	background-color: transparent;
 }
+*/
 
 button {
 	font-family: "IBM Plex Sans Condensed";
 	font-weight: 900;
 	white-space: nowrap;
+	box-sizing: border-box;
+	border: thin solid transparent;
+	appearance: none;
+	-webkit-appearance: none;
+	background-color: transparent;
+	color: #fff5;
+}
+
+button:focus {
+	color: #fff8;                                                                              
+	border: thin solid #fff2;
+}
+
+button:hover {            
+	color: #faaa;
+}
+
+button:active {
+	color: #faa;
+	background-color: #faa8;
 }
 
 button.togglesourcebutton {
@@ -727,6 +743,8 @@ scrollbars
 tooltips
 ------------------------------------------ */
 
+@import url('svg-arrow.css');
+
 .tippy-box[data-theme~='inverse'] {
   background-color: #222;
   color: #aaa;
@@ -734,14 +752,14 @@ tooltips
 }
 
 .tippy-box[data-theme~='inverse'][data-placement^='top'] > .tippy-arrow::before {
-  border-top-color: #666;
+  border-top-color: #222;
 }
 .tippy-box[data-theme~='inverse'][data-placement^='bottom'] > .tippy-arrow::before {
-  border-bottom-color: #666;
+  border-bottom-color: #222;
 }
 .tippy-box[data-theme~='inverse'][data-placement^='left'] > .tippy-arrow::before {
-  border-left-color:  #666;
+  border-left-color:  #222;
 }
 .tippy-box[data-theme~='inverse'][data-placement^='right'] > .tippy-arrow::before {
-  border-right-color:  #666;
+  border-right-color:  #222;
 }

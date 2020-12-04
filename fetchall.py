@@ -140,7 +140,8 @@ resources = [
 	('split-grid.js', 'https://unpkg.com/split-grid@1.0.9/dist/split-grid.js'),
 	('svg-pan-zoom.js', 'https://cdn.jsdelivr.net/npm/svg-pan-zoom-container@0.2.7'),
 	('popper.js', 'https://unpkg.com/@popperjs/core@2'),
-	('tippy.js', 'https://unpkg.com/tippy.js@6')
+	('tippy.js', 'https://unpkg.com/tippy.js@6'),
+	('svg-arrow.css', 'https://unpkg.com/tippy.js@6/dist/svg-arrow.css')
 ]
 
 google_font_resources = [
