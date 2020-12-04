@@ -39,17 +39,18 @@
 		<section class="actions">
 			<!-- FIXME: probably move this and additional controls to the nav bar header -->
 			<button onclick="downloadClicked()" class="downloadbutton">
-				<svg id="downloadicon" viewBox="-0.5 -0.5 10.5 12.5" width="1.5em" height="1.5em">
-					<path stroke="#8fcc" stroke-width="0.5" fill="#8fc8" d="M3,0 L7,0 L7,5 L10,5 L5,10 L0,5 L3,5 Z M0,10 L10,10 L10,12 L0,12"></path>
+				<svg id="downloadicon" viewBox="-3.5 -0.5 16 12" width="1.5em" height="1.5em">
+					<path stroke="#8fc" stroke-width="1.0" fill="none" d="M3,0 L7,0 L7,5 L10,5 L5,10 L0,5 L3,5 Z M0,10 L10,10 L10,12 L0,12 Z"></path>
 				</svg>
 				<span>Save to SVG</span>
 			</button>
 			<button id="linkbutton" class="linkbutton">
-				<svg id="showlinkbuttonicon" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 12 9" version="1.1">
-    				<path style="fill:#8cf4;stroke:#8cfc;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5;" d="m 6.35838,4.09989 c 0.0272,0.12824 0.0416,0.26212 0.0416,0.40011 0,1.05292 -0.84708,1.9 -1.9,1.9 h -1 c -1.05292,0 -1.9,-0.84708 -1.9,-1.9 0,-1.05292 0.84708,-1.9 1.9,-1.9 h 0.24427 a 0.6,0.6 0 1 0 0,-1.2 h -0.24427 c -1.71708,0 -3.1,1.38292 -3.1,3.1 0,1.71708 1.38292,3.1 3.1,3.1 h 1 c 1.71708,0 3.1,-1.38292 3.1,-3.1 0,-0.22202 -0.0232,-0.43902 -0.0677,-0.64883 a 0.6,0.6 0 1 0 -1.17394,0.24872 z m -0.71676,0.80022 c -0.0272,-0.12824 -0.0416,-0.26212 -0.0416,-0.40011 0,-1.05292 0.84708,-1.9 1.9,-1.9 h 1 c 1.05292,0 1.9,0.84708 1.9,1.9 0,1.05292 -0.84708,1.9 -1.9,1.9 h -0.24427 a 0.6,0.6 0 1 0 0,1.2 h 0.24427 c 1.7171,0 3.1,-1.38292 3.1,-3.1 0,-1.71708 -1.3829,-3.1 -3.1,-3.1 h -1 c -1.71708,0 -3.1,1.38292 -3.1,3.1 0,0.22202 0.0232,0.43902 0.0677,0.64883 a 0.6,0.6 0 1 0 1.17394,-0.24872 z" />
+				<svg id="showlinkbuttonicon" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 16 12" version="1.1">
+					<path style="fill:none;stroke:#8cf;stroke-linecap:round;stroke-linejoin:round;stop-color:black" d="m 7,6 c 0,1.41421 1.19829,3 2.5,3 h 2.5 c 1.4142,0 2.5,-1.69829 2.5,-3 0,-1.30171 -1.0858,-3 -2.5,-3 h -2 m -1,3 c 0,-1.41421 -1.08579,-3 -2.5,-3 h -2.5 c -1.41421,0 -2.5,1.58579 -2.5,3 0,1.41421 1.08579,3 2.5,3 h 2" />
+    				<!--<path style="fill:#8cf4;stroke:#8cfc;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5;" d="m 6.35838,4.09989 c 0.0272,0.12824 0.0416,0.26212 0.0416,0.40011 0,1.05292 -0.84708,1.9 -1.9,1.9 h -1 c -1.05292,0 -1.9,-0.84708 -1.9,-1.9 0,-1.05292 0.84708,-1.9 1.9,-1.9 h 0.24427 a 0.6,0.6 0 1 0 0,-1.2 h -0.24427 c -1.71708,0 -3.1,1.38292 -3.1,3.1 0,1.71708 1.38292,3.1 3.1,3.1 h 1 c 1.71708,0 3.1,-1.38292 3.1,-3.1 0,-0.22202 -0.0232,-0.43902 -0.0677,-0.64883 a 0.6,0.6 0 1 0 -1.17394,0.24872 z m -0.71676,0.80022 c -0.0272,-0.12824 -0.0416,-0.26212 -0.0416,-0.40011 0,-1.05292 0.84708,-1.9 1.9,-1.9 h 1 c 1.05292,0 1.9,0.84708 1.9,1.9 0,1.05292 -0.84708,1.9 -1.9,1.9 h -0.24427 a 0.6,0.6 0 1 0 0,1.2 h 0.24427 c 1.7171,0 3.1,-1.38292 3.1,-3.1 0,-1.71708 -1.3829,-3.1 -3.1,-3.1 h -1 c -1.71708,0 -3.1,1.38292 -3.1,3.1 0,0.22202 0.0232,0.43902 0.0677,0.64883 a 0.6,0.6 0 1 0 1.17394,-0.24872 z" />-->
 				</svg>
 				<span id="showlinkbuttontext">Link to Paisl</span>
-	            <svg id="copylinkbuttonicon" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 12 12" version="1.1">
+	      <svg id="copylinkbuttonicon" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 12 12" version="1.1">
 					<path style="fill:#8cf8;stroke:#8cfc;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.25;" d="m 0 0 h 7 v 4 h -2 v -2 h -3 v 3 h 2 v 2 h -4 v -7 m 5 5 h 7 v 7 h -7 v -7 z m 7 7 h 3 v 3 h -3 v -3 z" />
 				</svg>
 				<span id="copylinkbuttontext">Copy</span>
@@ -58,13 +59,27 @@
 				</svg>
 				<span id="copiedlinkbuttontext">Link Copied</span>	
 			</button>
-			<span class="linkrevealcontainer">
+			<button id="togglesourcebutton" class="togglesourcebutton hidden">
+				<svg id="showsourcebuttonicon" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 16 12" version="1.1">
+      <rect style="fill:none;fill-opacity:0.281435;stroke:#fc0;stroke-linecap:round;stroke-linejoin:round;stop-color:black" id="rect1410" width="15" height="11" x="0.5" y="0.5" />
+      <path style="fill:#fc0;fill-opacity:0.281435;stroke:#fc0;stroke-linecap:round;stroke-linejoin:round;stop-color:black" d="m 0.5,8.5 h 15" id="path1418" />
+      <path style="fill:#fc0;fill-opacity:0.281435;stroke:#fc0;stroke-linecap:round;stroke-linejoin:round;stop-color:black" d="m 5.5,6.5 h 5 l -2.5,-4.5 z" id="path1422" />
+				</svg>
+				<span id="showsourcebuttontext">Show Source Pane</span>
+	            <svg id="hidesourcebuttonicon" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 16 12" version="1.1">
+      <rect style="fill:none;fill-opacity:0.281435;stroke:#fc0;stroke-linecap:round;stroke-linejoin:round;stop-color:black" id="rect1410" width="15" height="11" x="0.5" y="0.5" />
+      <path style="fill:#fc0;fill-opacity:0.281435;stroke:#fc0;stroke-linecap:round;stroke-linejoin:round;stop-color:black" d="m 0.5,8.5 h 15" id="path1418" />
+      <path style="fill:#fc0;fill-opacity:0.281435;stroke:#fc0;stroke-linecap:round;stroke-linejoin:round;stop-color:black" d="m 5.5,2.5 h 5 l -2.5,4.5 z" id="path1422" />
+				</svg>
+				<span id="hidesourcebuttontext">Hide Source Pane</span>
+			</button>
+			<!--<span class="linkrevealcontainer">
 				<span class="linkreveal" id="linkreveal">
 					<span class="linkurlbox" id="linkurl">
 					  nothing to see here
 					</span>
 				</span>
-			</span>
+			</span>-->
 		</section>
 
 		<!--<span class="subtitle">
@@ -193,14 +208,14 @@
 	</section>
 
 	<!-- draggable vertical pane -->
-	<div class="rowgutter">
+	<div class="rowgutter" id="sourcepanegutter">
 		<svg xmlns='http://www.w3.org/2000/svg' width="7px" height="4px" viewBox="1 1 7 4">
 			<use href="#rowhandleicon"/>
 		</svg>
 	</div>
 
 	<!-- svg source view pane -->
-	<div class="svgoutcontainer">
+	<div class="svgoutcontainer" id="sourcepanecontainer">
 		<pre class="svgoutput">
 			SVG source
 		</pre>

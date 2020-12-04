@@ -7,7 +7,7 @@
 /*
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&family=IBM+Plex+Sans:wght@100;400;700&display=swap');
 */
-@import url('./ibm-plex.css');
+@import url('./fonts/ibm-plex.css');
 
 * {
 	font-family: 'IBM Plex Sans', sans-serif;
@@ -22,7 +22,6 @@
 }
 
 *.loading > svg {
-  transform: scale(3.0, 3.0);
   transition: transform 1s ease 0.5s;
 }
 
@@ -61,6 +60,10 @@ main {
 	overflow: hidden;
 }
 
+main.sourcepanehidden {
+	grid-template-rows: 50px 1fr !important;
+};
+
 main > nav {
 	box-shadow: 0px -3px 20px #0008;
 	z-index: 10;
@@ -75,7 +78,18 @@ span.logo {
 -webkit-text-stroke-width: .5px;
 }
 
+button:active {
+	outline: none;
+	background-color: #fdd5;
+	border: thin solid #fdd7;
+	opacity: 1.0;
+}
 
+button:focus {
+	outline: none;
+	box-shadow: inset 0 0 #fdd5 0px 2px;
+	opacity: 0.85;
+}
 
 main > nav {
 	/* font-family: "IBM Plex Sans Condensed"; */
@@ -87,6 +101,14 @@ main > nav {
 	background-color: #222;
 	height: 50px;
 	width: 100%;
+	grid-template-columns: min-content auto;
+	white-space: nowrap;
+}
+
+main > nav > section.actions {
+	place-items: end;
+	place-content: end;
+	place-self: end;
 }
 
 main > nav > span.logo {
@@ -413,12 +435,11 @@ button.downloadbutton {
 	/* margin: 1em; */
 	padding: 0.333em;
 	grid-gap: 0.333em;
-	/* white-space: nowrap; */
-	/* -webkit-appearance: none; */
+	-webkit-appearance: none;
 	appearance: none;
 	color: #fff6;
-	border: thin solid #fff5;
-	background-color: #fff3;
+	border: none;
+	background-color: transparent;
 }
 
 button.downloadbutton * {
@@ -440,11 +461,11 @@ button.linkbutton {
 	padding: 0.333em;
 	grid-gap: 0.333em;
 	white-space: nowrap;
-	/* -webkit-appearance: none; */
+	-webkit-appearance: none;
 	appearance: none;
 	color: #fff6;
-	border: thin solid #fff5;
-	background-color: #fff3;
+	border: none;
+	background-color: transparent;
 }
 
 button.linkbutton * {
@@ -527,11 +548,13 @@ button.copybutton {
 	width: content;
 	height: auto;
 	place-self: end;
-	grid-gap: 0.5em;
-	padding: 0px; 
+	border-radius: 0.33em;
+	/* margin: 1em; */
+	padding: 0.333em;
+	grid-gap: 0.333em;
 	border-radius: 0.33em;
 	margin: 0px;
-	whitespace: nowrap;
+	white-space: nowrap;
 	-webkit-appearance: none;
 	appearance: none;
 	color: #fff6;
@@ -545,14 +568,75 @@ button {
 	white-space: nowrap;
 }
 
+button.togglesourcebutton {
+    display: inline-grid;
+	place-items: center start ;
+	grid-template-columns: 1.5em min-content;
+	grid-auto-flow: column;
+	width: content;
+	height: auto;
+	place-self: end;
+	border-radius: 0.33em;
+	/* margin: 1em; */
+	padding: 0.333em;
+	grid-gap: 0.333em;
+    margin: 0px;
+	white-space: nowrap;
+	-webkit-appearance: none;
+	appearance: none;
+	color: #fff6;
+	border: none;
+	background-color: transparent;
+
+}
+
+button.togglesourcebutton.visible  #showsourcebuttonicon, 
+button.togglesourcebutton.visible  #showsourcebuttontext {
+	display: none;
+}
+
+button.togglesourcebutton.hidden  #hidesourcebuttonicon, 
+button.togglesourcebutton.hidden  #hidesourcebuttontext {
+	display: none;
+}
+
+
+button.togglesourcebutton.visible  #hidesourcebuttonicon, 
+button.togglesourcebutton.visible  #hidesourcebuttontext {
+	display: initial;
+}
+
+
+button.togglesourcebutton.hidden  #showsourcebuttonicon, 
+button.togglesourcebutton.hidden  #showsourcebuttontext {
+	display: initial !important;
+}
+
+#sourcepanecontainer.visible,
+#sourcepanegutter.visible {
+	display: initial !important;
+}
+
+#sourcepanecontainer.hidden,
+#sourcepanegutter.hidden {
+	display: none !important;
+}
+
+/* definiteion of this is above near top after main {...}  */
+/*
+body > main.sourcepanehidden {
+  // override the grid-template-rows when source pane is hidden ...
+}
+*/
+
 /* - - - - - slider - - - - - */
 
 .slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 3px;
-	margin-top: calc(0.5em - 1.5px);
-	margin-bottom: calc(0.5em - 1.5px);
+  height: 2px;
+	margin-top: calc(0.5em - 2px);
+	margin-bottom: calc(0.5em - 2px);
   border-radius: 2.5px;  
   background: #aaa6;
 	--border: thin solid #aaa6;
@@ -562,20 +646,32 @@ button {
   transition: opacity .2s;
 }
 
-.slider:active, .slider:focused, .slider:hover {
-	background: #faa8;
+input[type="range"]:focus::-webkit-slider-container,
+input[type="range"]:active::-webkit-slider-container
+{
+	background-color: #faa8;
 	border: thin solid #faa8;
 	opacity: 1.0;
 }
 
-.slider:active::-webkit-slider-thumb, .slider:focused::-webkit-slider-thumb, .slider:hover::-webkit-slider-thumb {
-	background: #f668;
+input[type="range"]:active::-webkit-slider-thumb, 
+input[type="range"]:focus::-webkit-slider-thumb
+{ 
+	background-color: #f668;
 	border: thin solid #f66a;
 	box-shadow: 0 0 3 3 #faab;
 	opacity: 1.0;
 }
 
-.slider::-webkit-slider-thumb {
+input[type="range"]:hover::-webkit-slider-container,
+input[type="range"]:hover::-webkit-slider-thumb {
+  	background-color: #fdd8;
+	border: thin solid #fdda;
+	/*box-shadow: 0 0 3 3 #faab;*/
+	opacity: 1.0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 5px;
@@ -621,8 +717,31 @@ scrollbars
 
 *::-webkit-scrollbar-thumb {
 	border: 3px solid #fff0;
-  background: #fff3;
-  border-radius: 6px;
+	background: #fff3;
+	border-radius: 6px;
 	--padding: 2px;
 	--margin: 2px;
+}
+
+/* ------------------------------------------
+tooltips
+------------------------------------------ */
+
+.tippy-box[data-theme~='inverse'] {
+  background-color: #222;
+  color: #aaa;
+  border-color: #666;
+}
+
+.tippy-box[data-theme~='inverse'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #666;
+}
+.tippy-box[data-theme~='inverse'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #666;
+}
+.tippy-box[data-theme~='inverse'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color:  #666;
+}
+.tippy-box[data-theme~='inverse'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color:  #666;
 }
