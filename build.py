@@ -1,7 +1,7 @@
 def showinfo():
     import os, sys
     import pprint
-    import glob
+    import glob,pathlib
     
     print(f"os.environ:")
     for k,v in os.environ.items():
@@ -13,18 +13,14 @@ def showinfo():
         print(f"  {repr(v)}")
     print(f"\n")
     
-    import pathtools.path
     def printtree(root):
         print(f"tree under {repr(root)}:")
-        for base, dirs, files in pathtools.path.walk(root):
-            for name in dirs:
-                print("  {}/".format(os.path.join(base, name)))
-            for name in files:
-                print("  {}".format(os.path.join(base, name)))
+        for name in pathlib.Path(root).rglob("**/*"):
+            print("  {}".format(name))
         print(f"\n")
     
     printtree(".")
-    printtree("/home/apps")
+    printtree(os.environ['HOME'])
     
     
 showinfo()
