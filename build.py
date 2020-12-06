@@ -26,7 +26,7 @@ def showinfo():
 #showinfo()
 
 import sys, os, glob
-sys.path = list(sys.path) + list(glob.glob("**/site-packages"))
+sys.path.append("/workspace/.heroku/python/lib/python3.8/site-packages")
 
 showinfo()
 
