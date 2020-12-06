@@ -4,12 +4,13 @@ domains:
 name: paisl
 region: nyc
 static_sites:
-- environment_slug: html
+- build_command: python3 -m pip install requests tinycss && python3 build.py
+  environment_slug: html
   github:
     branch: main
     deploy_on_push: true
     repo: un1tz3r0/paisl.cor3.app
   name: paisl-cor-3-app
-  output_dir: build/
+  output_dir: build
   routes:
   - path: /
