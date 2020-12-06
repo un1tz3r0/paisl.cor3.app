@@ -1,0 +1,15 @@
+domains:
+- domain: paisl.cor3.app
+  type: PRIMARY
+name: paisl
+region: nyc
+static_sites:
+- environment_slug: html
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: un1tz3r0/paisl.cor3.app
+  name: paisl-cor-3-app
+  output_dir: build/
+  routes:
+  - path: /

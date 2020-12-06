@@ -2668,7 +2668,7 @@ var whenready = ()=>{
 whenready().then(()=>{
 	
 	return Promise.all([
-	  addScript("split-grid.js"/*"https://unpkg.com/split-grid@1.0.9/dist/split-grid.js"*/).then((evt,url,scriptel)=>{ 
+	  addScript("js/split-grid.js"/*"https://unpkg.com/split-grid@1.0.9/dist/split-grid.js"*/).then((evt,url,scriptel)=>{ 
 		window.Split({
 			columnGutters: [{
 					track: 1,
@@ -2682,27 +2682,27 @@ whenready().then(()=>{
 		});
 	  }),
 
-	  addScript("svg-pan-zoom.js"/*"https://cdn.jsdelivr.net/npm/svg-pan-zoom-container@0.2.7"*/).then((evt, url, scriptel)=>{
-		console.info("svg-pan-zoom-container was loaded!");
+	  addScript("js/svg-pan-zoom.js"/*"https://cdn.jsdelivr.net/npm/svg-pan-zoom-container@0.2.7"*/).then((evt, url, scriptel)=>{
+			console.info("svg-pan-zoom-container was loaded!");
 	  }),
 
-	  addScript("popper.js"/*"https://unpkg.com/popper.js@1"*/).then((evt, url, scriptel)=>{
+	  addScript("js/popper.js"/*"https://unpkg.com/popper.js@1"*/).then((evt, url, scriptel)=>{
 	  	console.info("popper.js was loaded!");
 	  }).then(()=>{
-		return addScript("tippy.js"/*"https://unpkg.com/tippy.js@4"*/)
-  	  }).then((evt, url, scriptel)=>{
-		console.info("tippy.js was loaded!");
-		tippy.setDefaultProps({theme: 'inverse'});
-		setupinputs(refresh);
-		setupToggleSourceButton();
-		setupLinkButton();
-		loadParamsFromURL();
+			return addScript("js/tippy.js"/*"https://unpkg.com/tippy.js@4"*/)
+    }).then((evt, url, scriptel)=>{
+			console.info("tippy.js was loaded!");
+			tippy.setDefaultProps({theme: 'inverse'});
+			setupinputs(refresh);
+			setupToggleSourceButton();
+			setupLinkButton();
+			loadParamsFromURL();
 	  }).catch((err)=>{
-		console.error("failed loading popper and tippy.js from CDN URL: ",err);
-		setupinputs(refresh);
-		setupToggleSourceButton();
-		setupLinkButton();
-		loadParamsFromURL();
+			console.error("failed loading popper and tippy.js from CDN URL: ",err);
+			setupinputs(refresh);
+			setupToggleSourceButton();
+			setupLinkButton();
+			loadParamsFromURL();
 	  })
 	]).then((results)=>{
 		for(let el of document.querySelectorAll(".loading")) {

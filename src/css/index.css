@@ -7,7 +7,7 @@
 /*
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&family=IBM+Plex+Sans:wght@100;400;700&display=swap');
 */
-@import url('./fonts/ibm-plex.css');
+@import url('../fonts/ibm-plex.css');
 
 * {
 	font-family: 'IBM Plex Sans', sans-serif;
@@ -597,13 +597,6 @@ button.togglesourcebutton {
 	padding: 0.333em;
 	grid-gap: 0.333em;
     margin: 0px;
-	white-space: nowrap;
-	-webkit-appearance: none;
-	appearance: none;
-	color: #fff6;
-	border: none;
-	background-color: transparent;
-
 }
 
 button.togglesourcebutton.visible  #showsourcebuttonicon, 
