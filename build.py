@@ -11,7 +11,7 @@ def showinfo():
     
     print(f"tree:")
     for v in glob.glob("**", recursive=True):
-        print("  {repr(v)}")
+        print(f"  {repr(v)}")
     print(f"\n")
 
 showinfo()
