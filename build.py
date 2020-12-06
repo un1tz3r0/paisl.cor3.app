@@ -1,4 +1,3 @@
-
 def showinfo():
     import os, sys
     import pprint
@@ -9,11 +8,25 @@ def showinfo():
         print(f"  {repr(k)}: {repr(v)},")
     print(f"\n")
     
-    print(f"tree:")
-    for v in glob.glob("**", recursive=True):
+    print(f"sys.path:")
+    for v in sys.path:
         print(f"  {repr(v)}")
     print(f"\n")
-
+    
+    import pathtools.path
+    def printtree(root):
+        print(f"tree under {repr(root)}:")
+        for base, dirs, files in pathtools.path.walk(root):
+            for name in dirs:
+                print("  {}/".format(os.path.join(base, name)))
+            for name in files:
+                print("  {}".format(os.path.join(base, name)))
+        print(f"\n")
+    
+    printtree(".")
+    printtree("/home/apps")
+    
+    
 showinfo()
 
 
