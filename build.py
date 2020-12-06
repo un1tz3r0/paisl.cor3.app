@@ -1,3 +1,22 @@
+
+def showinfo():
+    import os, sys
+    import pprint
+    import glob
+    
+    print(f"os.environ:")
+    for k,v in os.environ.items():
+        print(f"  {repr(k)}: {repr(v)},")
+    print(f"\n")
+    
+    print(f"tree:")
+    for v in glob.glob("**", recursive=True):
+        print("  {repr(v)}")
+    print(f"\n")
+
+showinfo()
+
+
 import requests, re, shutil, os, pathtools.patterns, pathtools.path, glob
 import tinycss2
 from io import StringIO
@@ -190,7 +209,7 @@ def copy_source_files():
 # ----------------------------------------------------------------------------------------------------
 
 src_directory = "src"
-build_directory = "build"
+build_directory = "static"
 
 fetch_resources(
 	('js/split-grid.js', 'https://unpkg.com/split-grid@1.0.9/dist/split-grid.js'),
@@ -201,7 +220,7 @@ fetch_resources(
 )
 
 fetch_google_font_resources(
-	("./fonts/ibm-plex.css", "./fonts/ibm-plex/", "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&family=IBM+Plex+Sans:wght@100;400;700&display=swap")
+	("fonts/ibm-plex.css", "fonts/ibm-plex/", "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&family=IBM+Plex+Sans:wght@100;400;700&display=swap")
 )
 
 copy_source_files()
