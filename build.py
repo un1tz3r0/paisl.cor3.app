@@ -26,7 +26,9 @@ def showinfo():
 #showinfo()
 
 import sys, os, glob
-sys.path = list(sys.path) + list(glob.glob(".heroku/python/lib/python3*/."))
+sys.path = list(sys.path) + list(glob.glob(".heroku/python/lib/python*/"))
+
+showinfo()
 
 import requests, re, shutil, os, pathtools.patterns, pathtools.path, glob
 import tinycss2
