@@ -15,7 +15,7 @@ def showinfo():
     
     def printtree(root):
         print(f"tree under {repr(root)}:")
-        for name in pathlib.Path(root).rglob("**/*"):
+        for name in pathlib.Path(root).rglob("**"):
             print("  {}".format(name))
         print(f"\n")
     
@@ -26,7 +26,7 @@ def showinfo():
 #showinfo()
 
 import sys, os, glob
-sys.path = list(sys.path) + list(glob.glob(".heroku/python/lib/python*/"))
+sys.path = list(sys.path) + list(glob.glob("**/site-packages"))
 
 showinfo()
 
