@@ -23,8 +23,10 @@ def showinfo():
     printtree(os.environ['HOME'])
     
     
-showinfo()
+#showinfo()
 
+import sys, os, glob
+sys.path = list(sys.path) + list(glob.glob(".heroku/python/lib/python3*/."))
 
 import requests, re, shutil, os, pathtools.patterns, pathtools.path, glob
 import tinycss2
@@ -218,7 +220,7 @@ def copy_source_files():
 # ----------------------------------------------------------------------------------------------------
 
 src_directory = "src"
-build_directory = "static"
+build_directory = "build"
 
 fetch_resources(
 	('js/split-grid.js', 'https://unpkg.com/split-grid@1.0.9/dist/split-grid.js'),
